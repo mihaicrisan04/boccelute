@@ -1,0 +1,35 @@
+.nav-links li:nth-child(1) a {
+    color: var(--Old-rose); 
+}
+
+.slide-show {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(42, 61, 69, .5);
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    overflow: hidden;
+    z-index: -1;
+}
+
+#image-track {
+    display: flex;
+    gap: 4vmin;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(0%, -50%); 
+    user-select: none; 
+    overflow: hidden;
+  }
+  
+#image-track > .image {
+    width: 40vmin;
+    height: 56vmin;
+    object-fit: cover;
+    object-position: 100% center;
+}
+
+
