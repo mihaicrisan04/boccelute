@@ -1,3 +1,39 @@
-.nav-links li:nth-child(3) a {
+nav-links li:nth-child(3) a {
     color: var(--Old-rose); 
+}
+
+.about-page {
+    background-color: var(--Khaki);
+    width: 100vw;
+    height: calc(100vh - 100px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content {
+    /* background-color: var(--Coyote); */
+    width: 80%;
+    height: 80%;
+    color: var(--Charcoal);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* border-radius: 10px; */
+}
+
+.content h1 {
+    /* background-color: aqua; */
+    font-size: 2rem;
+    width: 90%;
+    height: 10%;
+    text-align: left;
+    border-bottom: 1px solid grey;
+    margin-bottom: 20px;
+}
+
+.content p {
+    /* background-color: green; */
+    font-size: 1.5rem;
+    width: 90%;
 }

@@ -101,6 +101,61 @@ nav {
     margin-left: 20px;
 }
 
+
+.shop-profile-wrapper {
+    width: 100px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+.shopping {
+    display: flex;
+    flex-flow: row nowrap;
+    /* position: absolute;
+    right: 290px; */
+    width: 30px;
+    height: 30px;
+}
+
+.shopping i {
+    box-sizing: border-box;
+    width: 100%; 
+    flex: none;
+
+    font-size: 2rem;
+    color: var(--Charcoal);
+    transition: all 0.3s ease 0s;  
+}
+
+.shopping i:hover {
+    color: var(--Old-rose);
+}
+
+.shopping span {
+    box-sizing: border-box;
+    width: 100%;
+    flex: none;
+    margin-left: -20%;
+    margin-top: -10%;
+    width: 15px;
+    height: 15px;
+    background-color: var(--Old-rose);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--Charcoal);
+    padding: 3px 10px;
+}
+
+.shopping:hover {
+    cursor: pointer;
+}
+
+
+
 .profile {
     display: flex;
     justify-content: space-around;

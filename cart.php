@@ -1,4 +1,5 @@
-<?php 
+<?php
+    require "operations.php";
 
     session_start();
 
@@ -13,6 +14,9 @@
         $user = $result->fetch_assoc();
     }
 
+    $products = getAllProducts();
+
+
 ?>
 
 
@@ -22,10 +26,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About</title>
+    <title>Cart</title>
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/about.css">
+    <link rel="stylesheet" href="css/cart.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
 </head>
 <body>
     <header>
@@ -40,7 +45,7 @@
                 <button>Contact</button>
             </a>
         </nav>
-        
+
         <div class="shop-profile-wrapper">
             <div class="shopping">
                 <a href="cart.php"><i class="fa fa-shopping-cart" aria-hidden="false"></i></a>
@@ -67,34 +72,66 @@
             </div>
         </div>
 
-        <div class="name-log-sign-container">
+        <div class="name-log-sign-container"> 
             <?php if(isset($user)): ?>
-                <p class="name"><?= htmlspecialchars($user["name"]) ?></p>
+                <p><?= htmlspecialchars($user["name"]) ?></p>
                 <p><a href="logout.php">Log out</a></p>
             <?php else: ?>
                 <p><a href="login.php">Log in</a> or <a href="signup.html">Sign up</a></p>
             <?php endif; ?>
         </div>
+    </header>   
 
-    </header> 
 
-
-    <div class="about-page">
-            <div class="content">
-                <h1>Title</h1>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi ea nihil, quasi eos fuga sed, cumque impedit rerum tempora vitae doloribus amet esse unde accusamus ipsa at illum, dignissimos itaque!</p>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi ea nihil, quasi eos fuga sed, cumque impedit rerum tempora vitae doloribus amet esse unde accusamus ipsa at illum, dignissimos itaque!</p>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi ea nihil, quasi eos fuga sed, cumque impedit rerum tempora vitae doloribus amet esse unde accusamus ipsa at illum, dignissimos itaque!</p>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi ea nihil, quasi eos fuga sed, cumque impedit rerum tempora vitae doloribus amet esse unde accusamus ipsa at illum, dignissimos itaque!</p>
+    
+    <!-- Shopping Cart -->
+    <div class="cart-container">
+        <div class="cart-wrapper">
+            <div class="cart-header">
+                <h1>Cart</h1>
             </div>
+            
+            <div class="cart-item-list">
+                <ul>
+                    <?php   
+                        if (isset($_SESSION["user_id"])) {
+
+                            if (isset($_SESSION["cart"]))
+                                displayCartItems($_SESSION["cart"], $products);
+                            else 
+                                echo "<p class=\"warn-msg\">No items in the cart</p>";
+                            
+                        }
+                        else {
+                            echo "<p class=\"warn-msg\">Log in to use the cart</p>";
+                        }
+
+                    ?>
+                </ul>
+            </div>
+
+            <div class="cart-footer">
+                <div class="total-wrapper">
+                    <h1>Total :</h1>
+                    <h1>
+                        <?php
+                            if (isset($_SESSION["total"])) 
+                                echo $_SESSION["total"];
+                            else echo "0";
+                        ?>
+                    </h1>
+                    <h1>lei</h1>
+                </div>
                 
+                <form class="order-frm"action="cart-logic.php" method="post">
+                    <button name="order">Place Order</button>
+                </form>
+
+            </div>
+        </div>
     </div>
 
-
-
-
-
-
+    
 
     <footer>
         <div class="footer-content">
@@ -108,5 +145,6 @@
             </ul>
         </div>
     </footer>
+
 </body>
 </html>

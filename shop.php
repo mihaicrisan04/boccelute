@@ -1,4 +1,5 @@
 <?php 
+    require "operations.php";
 
     session_start();
 
@@ -12,6 +13,10 @@
 
         $user = $result->fetch_assoc();
     }
+
+    
+
+    $products = getAllProducts();
 
 ?>
 
@@ -41,33 +46,68 @@
             </a>
         </nav>
 
-        <div class="shopping">
-            <i class="fa fa-shopping-cart" aria-hidden="false"></i>
-            <span class="quantity">0</span>
+        <div class="shop-profile-wrapper">
+            <div class="shopping">
+                <a href="cart.php"><i class="fa fa-shopping-cart" aria-hidden="false"></i></a>
+                <span class="quantity">
+                    <?php 
+                        if (isset($_SESSION["cart"])) {
+                            $count = count($_SESSION["cart"]);
+                            if ($count) {
+                                echo $count;
+                            }
+                            else {
+                                echo "0";
+                            }
+                        }   
+                        else {
+                            echo "0";
+                        }
+                        ?>
+                </span>
+            </div>
+
+            <div class="profile">
+                <a href="profile.php"><i class="fa fa-user"></i></a>
+            </div>
         </div>
 
-        <div class="profile">
-            <a href="profile.php"><i class="fa fa-user"></i></a>
+        <div class="name-log-sign-container"> 
+            <?php if(isset($user)): ?>
+                <p><?= htmlspecialchars($user["name"]) ?></p>
+                <p><a href="logout.php">Log out</a></p>
+            <?php else: ?>
+                <p><a href="login.php">Log in</a> or <a href="signup.html">Sign up</a></p>
+            <?php endif; ?>
         </div>
     </header>   
 
     <div class="store-wrapper">
-        <div class="list">
+                
+        <div class="filter-menu">
+                <h1>Filter</h1>
+                <select name="filter_select" id="filter_select">
+                    <option value="">None</option>
+                    <option value="increasing_order">Price Up</option>
+                    <option value="decreasing_order">Price Down</option>
+                </select>
+        </div>
+                
+        <div class="product-container">
+            
+            <h2>Produse</h2>
+
+            <div class="product-list">
+                <?php
+                    display_products($products);
+                ?>
+            </div>
 
         </div>
-    </div>
-    
 
-    <div class="card">
-        <h1>Card</h1>
-        <ul class="listCard"></ul>
-        <div class="checkout">
-            <div class="total">0</div>
-            <div class="closeShopping">Close</div>
-        </div>
     </div>
 
-    
+
     <footer>
         <div class="footer-content">
             <h3>Boccelute</h3>
@@ -82,6 +122,7 @@
     </footer>
 
 
-    <script src="js/shopping.js"></script>
+    <script type="module" src="js/shopping.js"></script>
+    <script type="module" src="js/filter-products.js"></script>
 </body>
 </html>

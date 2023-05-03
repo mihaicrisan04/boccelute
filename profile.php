@@ -44,26 +44,52 @@
             </a>
         </nav>
         
-        <div class="profile">
-            <a href="profile.php"><i class="fa fa-user"></i></a>
-
-            <div class="name-log-sign-container">
-                <?php if(isset($user)): ?>
-                    <p class="name"><?= htmlspecialchars($user["name"]) ?></p>
-                    <p><a href="logout.php">Log out</a></p>
-                <?php else: ?>
-                    <p><a href="login.php">Log in</a>   or   <a href="signup.html">Sign up</a></p>
-                <?php endif; ?>
+        <div class="shop-profile-wrapper">
+            <div class="shopping">
+                <a href="cart.php"><i class="fa fa-shopping-cart" aria-hidden="false"></i></a>
+                <span class="quantity">
+                    <?php 
+                        if (isset($_SESSION["cart"])) {
+                            $count = count($_SESSION["cart"]);
+                            if ($count) {
+                                echo $count;
+                            }
+                            else {
+                                echo "0";
+                            }
+                        }   
+                        else {
+                            echo "0";
+                        }
+                        ?>
+                </span>
             </div>
+
+            <div class="profile">
+                <a href="profile.php"><i class="fa fa-user"></i></a>
+            </div>
+        </div>
+            
+
+        <div class="name-log-sign-container">
+            <?php if(isset($user)): ?>
+                <p class="name"><?= htmlspecialchars($user["name"]) ?></p>
+                <p><a href="logout.php">Log out</a></p>
+            <?php else: ?>
+                <p><a href="login.php">Log in</a>   or   <a href="signup.html">Sign up</a></p>
+            <?php endif; ?>
         </div>
 
     </header>   
 
 
-
-    <h3>Your Orders</h3>
-    <div class="orders-list">
-
+    <div class="profile-page">
+                        
+        <h3>Your Orders</h3>
+        <div class="orders-list">
+    
+        </div>
+        
     </div>
 
 

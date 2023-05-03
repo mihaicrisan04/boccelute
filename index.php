@@ -30,7 +30,7 @@
 </head>
 <body>
     <header>
-        <img class="logo "src="images/logo.png" alt="Logo Image">
+        <img class="logo" src="images/logo.png" alt="Logo Image">
 
         <nav>
             <ul class="nav-links" >
@@ -43,8 +43,30 @@
             </a>
         </nav>
         
-        <div class="profile">
-            <a href="profile.php"><i class="fa fa-user"></i></a>
+        <div class="shop-profile-wrapper">
+            <div class="shopping">
+                <a href="cart.php"><i class="fa fa-shopping-cart" aria-hidden="false"></i></a>
+                <span class="quantity">
+                    <?php 
+                        if (isset($_SESSION["cart"])) {
+                            $count = count($_SESSION["cart"]);
+                            if ($count) {
+                                echo $count;
+                            }
+                            else {
+                                echo "0";
+                            }
+                        }   
+                        else {
+                            echo "0";
+                        }
+                        ?>
+                </span>
+            </div>
+
+            <div class="profile">
+                <a href="profile.php"><i class="fa fa-user"></i></a>
+            </div>
         </div>
 
         <div class="name-log-sign-container"> 

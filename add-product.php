@@ -1,12 +1,7 @@
 <?php
     require_once('./operations.php');
 
-    $mysqli = require __DIR__ . "/database.php";
-
-    $sql = "SELECT * FROM user
-                WHERE id = {$_SESSION["user_id"]}";
-
-    $result = $mysqli->query($sql);
+    session_start();
 
 ?>
 
@@ -27,7 +22,7 @@
 
     <h1>Add Product</h1>
 
-    <form action="display.php" method="post" id="add_product" novalidate>
+    <form action="process-add-product.php" method="post" id="add_product" enctype="multipart/form-data">
 
         <?php
             inputFields("name", "", "text");
@@ -38,7 +33,7 @@
 
         <br>
 
-        <button class="add-product-btn" type="submit" name="submit">Add Product</button>
+        <button class="add-product-btn" type="submit" name="add-product">Add Product</button>
 
     </form>
 

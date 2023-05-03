@@ -1,6 +1,10 @@
+
+// import { response as products } from "./filter-products";
+
 let oppenShopping = document.querySelector('.shopping');
 let closeShopping = document.querySelector('.closeShopping');
-let list = document.querySelector('.list');
+let addToCartBTN = document.querySelector('.add-to-cart-btn');
+// let list = document.querySelector('.list');
 let listCard = document.querySelector('.listCard');
 let body = document.querySelector('body');
 let total = document.querySelector('.total');
@@ -15,75 +19,54 @@ closeShopping.addEventListener('click', () => {
     body.classList.remove('active');
 })
 
+// Produs object
+// descriere: "Ceva poza Random"
+// img_url: "images/uploads/Image1.jpg"
+// name: "Random"
+// price: "990"
+// product_id: "9"
+// stock_quantity: "0"
 
+// let products = [
+//     {
+//         id : 1,
+//         name: 'Product 1',
+//         image: '1.png',
+//         price: 12
+//     },
 
-let products = [
-    {
-        id : 1,
-        name: 'Product 1',
-        image: '1.png',
-        price: 12
-    },
-
-    {
-        id : 2,
-        name: 'Product 2',
-        image: '2.png',
-        price: 43
-    },
-
-    {
-        id : 3,
-        name: 'Product 3',
-        image: '3.png',
-        price: 32
-    },
-
-    {
-        id : 4,
-        name: 'Product 4',
-        image: '4.png',
-        price: 1342
-    },
-
-    {
-        id : 5,
-        name: 'Product 5',
-        image: '5.png',
-        price: 433
-    },
-
-    {
-        id : 6,
-        name: 'Product 6',
-        image: '6.png',
-        price: 764
-    }
-];
 
 let listCards = [];
 
-initApp();
+// initApp();
 
-function initApp() {
-    products.forEach((value, key) => {
-        let newDiv = document.createElement('div');
-        newDiv.classList.add('item');
-        newDiv.innerHTML = `
-            <img src="images/${value.image}" /> 
-            <div class="title"> ${value.name} </div>
-            <div class="price"> ${value.price.toLocaleString()} </div>
-            <button onclick="addToCard(${key})">Add To Card</button>
-        `;
-        list.appendChild(newDiv);
-    })
-}
+// function initApp() {
+//     products.forEach((value, key) => {
+//         let newDiv = document.createElement('div');
+//         newDiv.classList.add('item');
+//         newDiv.innerHTML = `
+//             <img src="images/${value.image}" /> 
+//             <div class="title"> ${value.name} </div>
+//             <div class="price"> ${value.price.toLocaleString()} </div>
+//             <button onclick="addToCard(${key})">Add To Card</button>
+//         `;
+//         list.appendChild(newDiv);
+//     })
+// }
+
+// addToCartBTN.addEventListener('click', addToCard(key));
 
 function addToCard(key) {
-    if (listCards[key] == null) {
-        listCards[key] = products[key];
-        listCards[key].quantity = 1;
+    for (let item of products) {
+        if (item.product_id == key && listCards[key] == null) {
+            listCards[key] = item;
+        }
     }
+
+    // if (listCards[key] == null) {
+    //     listCards[key] = products[key];
+    //     listCards[key].quantity = 1;
+    // }
     reloadCards();
 }
 
@@ -99,7 +82,7 @@ function reloadCards() {
             let newDiv = document.createElement('li');
             newDiv.innerHTML = `
                 <div> 
-                    <img src="images/${value.image}"/>
+                    <img src="images/${value.img_url}"/>
                 </div>
                 <div>${value.name}</div>
                 <div>${value.price.toLocaleString()}</div>
@@ -123,7 +106,7 @@ function changeQuantity(key, quantity) {
     else {
         listCards[key].quantity = quantity;
         listCards[key].price = quantity * products[key].price;
-        console.log(quantity, products[key].price, listCards[key].price); 
+        // console.log(quantity, products[key].price, listCards[key].price); 
     }
     reloadCards();
 }
